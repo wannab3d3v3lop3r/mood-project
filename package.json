@@ -1,18 +1,18 @@
 {
   "name": "mood",
   "version": "1.0.0",
-  "description": "full-stack website that allows users to store journal entries",
+  "description": "",
   "main": "models.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "start",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wannab3d3v3lop3r/mood-project.git"
+    "url": "git+https://github.com/wannab3d3v3lop3r/mood-project.git"
   },
   "author": "Chris Vo",
   "license": "ISC",

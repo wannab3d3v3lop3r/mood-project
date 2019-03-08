@@ -2,8 +2,9 @@ language: node_js
 node_js: node
 deploy:
   provider: heroku
+  edge: true
   api_key:
     secure: <YOUR ENCRYPTED KEY HERE>
-  app: <YOUR APP NAME HERE>
+  app: agile-cove-70530
   on:
     repo: <YOUR REPO INFO HERE>

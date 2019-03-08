@@ -1,4 +1,3 @@
-const uuid = require('uuid');
 
 // This module provides volatile storage, using a `BlogPost`
 // model. We haven't learned about databases yet, so for now
@@ -15,30 +14,25 @@ function StorageException(message) {
    this.name = "StorageException";
 }
 
-const JounralPosts = {  
+const JournalPosts = {  
   create: function(mood, title, thoughts) {
     const post = {
-      id: uuid.v4(),
       mood: mood,
       title: title,
       thoughts: thoughts,
       publishDate: Date.now()
     };
-    this.posts.push(post);
-    return post;
   },
   get: function(id) {
   },
   delete: function(id) {
-
   },
   update: function(updatedPost) {
-
   }
 };
 
-function createBlogPostsModel() {
-  const storage = Object.create(BlogPosts);
+function createJournalPostsModel() {
+  const storage = Object.create(JournalPosts);
   storage.posts = [];
   return storage;
 }

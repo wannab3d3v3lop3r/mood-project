@@ -23,43 +23,45 @@ app.use('journal-post', journalPostRouter);
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here
 // and then assign a value to it in run
-let server;
 
-function runServer(databaseUrl = config.DATABASE_URL, port=process.env.PORT) {
-  return new Promise((resolve, reject) => {
-    mongoose.connect(databaseUrl, err => {
-      if (err) {
-        return reject(err);
-      }
+// let server;
 
-      server = app.listen(port, () => {
-        console.log(`Your app is listening on port ${port}`);
-        resolve();
-      })
-      .on('error', err => {
-        mongoose.disconnect();
-        reject(err);
-      });
-    });
-  });
+// function runServer(databaseUrl = config.DATABASE_URL, port=process.env.PORT) {
+//   return new Promise((resolve, reject) => {
+//     mongoose.connect(databaseUrl, err => {
+//       if (err) {
+//         return reject(err);
+//       }
 
-}
+//       server = app.listen(port, () => {
+//         console.log(`Your app is listening on port ${port}`);
+//         resolve();
+//       })
+//       .on('error', err => {
+//         mongoose.disconnect();
+//         reject(err);
+//       });
+//     });
+//   });
+
+// }
 
 // this function closes the server, and returns a promise. we'll
 // use it in our integration tests later.
-function closeServer() {
-  return mongoose.disconnect().then(() => {
-    return new Promise((resolve, reject) => {
-      console.log("Closing server");
-      server.close(err => {
-        if (err) {
-          return reject(err);
-        }
-        resolve();
-      });
-    });
-  });
-}
+
+// function closeServer() {
+//   return mongoose.disconnect().then(() => {
+//     return new Promise((resolve, reject) => {
+//       console.log("Closing server");
+//       server.close(err => {
+//         if (err) {
+//           return reject(err);
+//         }
+//         resolve();
+//       });
+//     });
+//   });
+// }
 
 // `closeServer` function is here in original code
 
@@ -69,7 +71,13 @@ function closeServer() {
 // When we open this file in order to import app and runServer in a test module, we don't want the server to automatically run,
 // and this conditional block makes that possible.
 if (require.main === module) {
-  runServer().catch(err => console.error(err));
+
+  app.listen(process.env.PORT || 8080, function() {
+    console.info(`App listening on ${this.address().port}`);
+  });
+  // runServer().catch(err => console.error(err));
 };
 
-module.exports = {runServer, app, closeServer};
+// module.exports = {runServer, app, closeServer};
+
+module.exports = {app};

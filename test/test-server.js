@@ -10,14 +10,14 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe("Testing", function() {
-  
-  beforeEach(function(){
-    return runServer(config.TEST_DATABASE_URL);
-  })
 
-  afterEach(function(){
-    return closeServer();
-  })
+  // beforeEach(function(){
+  //   return runServer(config.TEST_DATABASE_URL);
+  // })
+
+  // afterEach(function(){
+  //   return closeServer();
+  // })
 
   it("Recieve a 200 status code", function() {
     return chai

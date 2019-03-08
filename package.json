@@ -2,10 +2,7 @@
   "name": "mood",
   "version": "1.0.0",
   "description": "",
-  "main": "models.js",
-  "directories": {
-    "test": "test"
-  },
+  "main": "server.js",
   "scripts": {
     "test": "mocha",
     "start": "node server.js"
@@ -21,8 +18,9 @@
   },
   "homepage": "https://github.com/wannab3d3v3lop3r/mood-project#readme",
   "dependencies": {
+    "express": "^4.16.4",
     "mongoose": "^5.4.17",
-    "express": "^4.16.4"
+    "morgan": "^1.9.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

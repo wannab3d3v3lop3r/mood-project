@@ -7,14 +7,37 @@
     <body>
         <p>Hello World</p>
 
-        <form role="form" aria-label="User's Journal Post" action="#" class="js-post-form">
-            <label for="mood">mood</label>
-            <input id="mood" type="text" name="">
-            <label for="title">title</label>
-            <input id="title" type="text" name="">
-            <label for="thoughts" type="text" name="">thoughts</label>
-            <input id="thoughts">
-        </form>
+        <!-- <section class="register">
+            <form>
+                <label for="email">Email</label>
+                <input id="email" type="text">
+                <label for="password">Password</label>
+                <input id="password" type="text">
+                <button type="submit">submit</button>
+            </form>
+        </section> -->
+
+        <section>
+            <form action="#" class="js-login" aria-label="login">
+                <label for="email">Email</label>
+                <input id="email" type="text" class="user-email" required>
+                <label for="password">Password</label>
+                <input id="password" type="password" class="user-password" required>
+                <button type="submit">submit</button>
+            </form>
+        </section>
+
+        <!-- <section class="journal-post">
+            <form role="form" aria-label="User's Journal Post" action="#" class="js-post-form">
+                <label for="mood">mood</label>
+                <input id="mood" type="text" name="">
+                <label for="title">title</label>
+                <input id="title" type="text" name="">
+                <label for="thoughts" type="text" name="">thoughts</label>
+                <input id="thoughts">
+                <button type="submit">submit</button>
+            </form>
+        </section> -->
         
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="index.js"></script>

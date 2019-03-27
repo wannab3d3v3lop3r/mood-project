@@ -3,7 +3,7 @@ const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
-const config = require('../config');
+const {JWT_EXPIRY, JWT_SECRET} = require('../config');
 
 const authRouter = express.Router();
 
@@ -20,9 +20,9 @@ We default to the token expiring in one week (this is the exports.JWT_EXPIRY = p
 
 */
 const createAuthToken = function(user) {
-  return jwt.sign({user}, config.JWT_SECRET, {
+  return jwt.sign({user}, JWT_SECRET, {
     subject: user.username,
-    expiresIn: config.JWT_EXPIRY,
+    expiresIn: JWT_EXPIRY,
     algorithm: 'HS256'
   });
 };
@@ -46,4 +46,4 @@ authRouter.post('/refresh', jwtAuth, (req, res) => {
   res.json({authToken});
 });
 
-module.exports = authRouter;
+module.exports = {authRouter, localAuth, jwtAuth};

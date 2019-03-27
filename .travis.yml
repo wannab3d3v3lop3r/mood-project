@@ -7,4 +7,4 @@ deploy:
     secure: <YOUR ENCRYPTED KEY HERE>
   app: agile-cove-70530
   on:
-    repo: <YOUR REPO INFO HERE>
+    repo: https://github.com/wannab3d3v3lop3r/mood-project

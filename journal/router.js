@@ -1,27 +1,41 @@
 'use strict';
 
 const express = require('express');
-const {Journal} = require('./model');
 
-const router = express.Router();
+const { jwtAuth } = require('../auth/router')
+const { Journal } = require('./model');
+const { User } = require('../users/model');
 
-router.get('/', (req,res) => {
+const journalRouter = express.Router();
+
+// journalRouter.use(jwtAuth);
+
+journalRouter.get('/', (req,res) => {
     Journal
       .find()
       .then(journalPosts => {
-        res.json(
-          journalPosts.map((journalPost) => journalPost.serialize())
-        );
+        return res.json(journalPosts.map(journalPost => journalPost.serialize()));
       })
     .catch(
       err => {
         console.error(err);
-        res.status(500).json({message: 'Internal server error'});
+        return res.status(500).json({message: 'Internal server error'});
       }
     )
 });
+
+journalRouter.get('/:id', jwtAuth, (req,res) => {
+    Journal
+        .findById(req.params.id)
+        .then(user => {
+            return res.status(200).json(user.serialize())
+        })
+        .catch(err => {
+            return res.status(500).json(err);
+        })
+})
   
-router.post('/', (req,res) => {
+journalRouter.post('/', jwtAuth, (req,res) => {
     const requiredFields = ['mood', 'title', 'thoughts'];
 
     for(let i = 0; i < requiredFields.length; i++){
@@ -33,27 +47,28 @@ router.post('/', (req,res) => {
         }
     }
 
+    const journalPost = {
+        user: req.user.id,
+        mood: req.body.mood,
+        title: req.body.title,
+        thoughts: req.body.thoughts,
+        date: Date.now()
+    }
+
     Journal
-        .create({
-            mood: req.body.mood,
-            title: req.body.title,
-            thoughts: req.body.thoughts,
-            date: req.body.publishDate
+        .create(journalPost)
+        .then(journalPost => {
+            return res.status(201).json(journalPost.serialize())
         })
-        .then(
-            journalPost => res.status(201).json(journalPost.serialize())
-        )
         .catch(err =>{
-            console.error(error);
-            res.status(500).json({message: 'Internal server error'})
-        });
+            console.error(err);
+            return res.status(500).json({message: 'Internal server error'})
+        })
 });
 
-router.put('/:id', (req,res) => {
+journalRouter.put('/:id', jwtAuth, (req,res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-        const message = (
-        `Request path id (${req.params.id}) and request body id ` +
-        `(${req.body.id}) must match`);
+        const message = (`Request path id (${req.params.id}) and request body id ` + `(${req.body.id}) must match`);
         console.error(message);
         // we return here to break out of this function
         return res.status(400).json({message: message});
@@ -64,7 +79,7 @@ router.put('/:id', (req,res) => {
 
     updateableFields.forEach(field => {
         if (field in req.body) {
-        toUpdate[field] = req.body[field];
+            toUpdate[field] = req.body[field];
         }
     });
 
@@ -74,11 +89,11 @@ router.put('/:id', (req,res) => {
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-router.delete('/:id',(req,res) => {
+journalRouter.delete('/:id', jwtAuth, (req,res) => {
     Journal
         .findByIdAndRemove(req.params.id)
         .then(() => res.status(204).end())
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-module.exports = router;
+module.exports = {journalRouter};

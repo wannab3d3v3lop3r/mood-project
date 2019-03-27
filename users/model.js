@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 //schema to represent a blog post
 const userSchema = mongoose.Schema({
-    username: {type: String, required: true},
+    username: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     firstName: {type: String, required: true},
     lastName: {type: String, requried: true}
@@ -25,7 +25,7 @@ userSchema.methods.serialize = function() {
 
 // Never store a password directly out of security concerns.
 // Hash the password before storing it.
-userSchema.statics.hasPassword = function(password) {
+userSchema.statics.hashPassword = function(password) {
   return bcrypt.hash(password, 10);
 }
 

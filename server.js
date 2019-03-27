@@ -6,21 +6,35 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const {DATABASE_URL, PORT} = require('./config');
-const journalPostRouter = require('./journal/router');
-const userRouter = require('./users/router');
-const authRouter = require('./auth/router');
+const { journalRouter } = require('./journal/router');
+const { userRouter } = require('./users/router');
+const { authRouter } = require('./auth/router');
+const { localStrategy, jwtStrategy } = require('./auth/strategies');
 
 const app = express();
 
+// CORS
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  if (req.method === 'OPTIONS') {
+    return res.send(204);
+  }
+  next();
+});
+
 //MIDDLEWARE
+passport.use(localStrategy); //Passport to use our localStrategy when receiving Username + password combination
+passport.use(jwtStrategy); //Passport to use our jwtStrategy when receiving JWT
 
 app.use(morgan("common")); // log the http layer
 app.use(express.json()); // AJAX request JSON data payload can be parsed and saved into request.body
 app.use(express.static('public')); //Intercepts al HTTP requests that match files inside /public
 
-app.use('/user',userRouter);
-app.use('/journal-post', journalPostRouter);
-app.use('/api/auth', authRouter);
+app.use('/api/user/',userRouter);
+app.use('/api/journal-post/', journalRouter);
+app.use('/api/auth/', authRouter);
 
 //If any user enters a random endpoint, returns a not found message
 app.use('*', (req, res) => {

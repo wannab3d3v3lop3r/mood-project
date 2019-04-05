@@ -47,6 +47,8 @@ journalRouter.post('/', jwtAuth, (req,res) => {
         }
     }
 
+    console.log(`req user is ${req.user}`);
+
     const journalPost = {
         user: req.user.id,
         mood: req.body.mood,

@@ -1,33 +1,36 @@
-"use strict";
+// "use strict";
 
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const faker = require('faker');
+// const chai = require("chai");
+// const chaiHttp = require("chai-http");
+// const faker = require('faker');
+// const mongoose = require('mongoose');
 
-const {TEST_DATABASE_URL, PROD_DATABASE_URL} = require('../config');
-const {app, runServer, closeServer} = require("../server");
-const {Journal} = require('../journal/model');
+// mongoose.promise = Promise.global;
 
-const expect = chai.expect;
+// const {TEST_DATABASE_URL} = require('../config');
+// const {app, runServer, closeServer} = require("../server");
+// const {Journal} = require('../journal/router');
 
-chai.use(chaiHttp);
+// const expect = chai.expect;
 
-describe("Testing", function() {
+// chai.use(chaiHttp);
 
-  before(function(){
-    return runServer(PROD_DATABASE_URL);
-  });
+// describe("Testing", function() {
 
-  after (function (){
-    return closeServer();
-  });
+//   before(function(){
+//     return runServer(TEST_DATABASE_URL);
+//   });
 
-  it("Getting /journal-post responds with a journal and getting a status of 200", function() {
-    return chai
-      .request(app)
-      .get("/api/journal-post/")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      })
-  })
-});
+//   after (function (){
+//     return closeServer();
+//   });
+
+//   it("Getting /journal-post responds with a journal and getting a status of 200", function() {
+//     return chai
+//       .request(app)
+//       .get("/api/journal-post/")
+//       .then(function(res) {
+//         expect(res).to.have.status(200);
+//       })
+//   })
+// });

@@ -13,6 +13,9 @@ const { localStrategy, jwtStrategy } = require('./auth/strategies');
 
 const app = express();
 
+app.use(morgan('common'));
+app.use(express.static('/public'));
+
 // CORS
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');

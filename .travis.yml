@@ -1,10 +1,12 @@
 language: node_js
 node_js: node
+services:
+- mongodb
 deploy:
-  provider: heroku
   edge: true
+  provider: heroku
   api_key:
-    secure: <YOUR ENCRYPTED KEY HERE>
-  app: agile-cove-70530
+    secure: mvQfA4hA+mbWYPbAOrJXny6AM6U/sEfQX0/6r4ZjpOmxduOppCjiZYI6aZ1YFy6/fXmi18IXstVdZhK6zO/H+09m9lhV6iGDq/J5wfHld/yWWNZ6aXjn6Y8nDUpHVB+vbDT0N620GtA1+sRM4WccEB856f/wvYy/qyo3ttwh2adR7cZtyahHjWh1/0/5INGgWo4NuI6nfNmpL/lDzaiGsjyZiLVVrlLOJECULypi/XwOWB9e4iABKyJmk4PcpWYp5PI703hPhS2EQ4N5y/ZMkoLYTMkClJid2J8dnURVGoao76BQY4kByhX/ja/dzIXq9EL2+xE0fIqxujHyvAvk9o44+28NiWt5mf6hyKpBNFNVoxi1+g+7GNuzZJtN5+XuW8vyRBP6a3tZcCfluB8Apg+r9gx4Fp4vthvH2uzeoy+bSN8xPK6jl1ognUERG++YH2ue0LJOzcqzbCuz9HJ80v/xRm1Csiu9X5ALe5SoyiThJzGPBFQqxBLUiGjUR4Pu9HlRbu2VRO4QZLNDidqKZveBqL4s6O2mPwu8Zrf5/9BgOfZ+qHgVxRRGHAu9tkwnztmnzbRFdZVN+b8JzzKw8C+kb7r39M/gcRma4CvW0nQFiV9qvoIKDJDYf9uGD8CnmxPYMFk4KiJSTsI8qRQYiGJGJe/l0+8jK1jgmG+bzvs=
+  app: infinite-island-27570
   on:
-    repo: https://github.com/wannab3d3v3lop3r/mood-project
+    repo: wannab3d3v3lop3r/mood-project

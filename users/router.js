@@ -1,13 +1,11 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser');
 
 const { User } = require('./model');
 const { Journal } = require('../journal/model');
 
 const userRouter = express.Router();
-const jsonParser = bodyParser.json();
 
 userRouter.get('/',(req,res) => {
     return User
@@ -33,7 +31,7 @@ userRouter.get('/:id',(req,res) => {
         })
 });
 
-userRouter.post('/', jsonParser, (req,res) => {
+userRouter.post('/', (req,res) => {
 
     //Check to see if the req.body consists of the requiredFields
 
@@ -41,16 +39,19 @@ userRouter.post('/', jsonParser, (req,res) => {
 
     const missingFields = requiredFields.find(fields => !( fields in req.body ));
 
+    console.log(`the request body through userRouter endpoint is ${JSON.stringify(req.body)} \n`);
+    // console.log(`req.body went submitting to endpoint length ${JSON.stringify(req.body.username.length)} \n\n`);
+
     if(missingFields) {
         return res.status(422).json({
             code: 422,
-            reason: 'Validation Error',
+            reason: 'ValidationError',
             message: 'Missing field',
-            location: missingField
+            location: missingFields
         });
     }
 
-    //Make sure the values of each req.body are stirngs
+    //Make sure the values of each req.body are strings
 
     const stringField = ['username','password','firstName','lastName'];
 
@@ -62,7 +63,7 @@ userRouter.post('/', jsonParser, (req,res) => {
     if(nonStringField){
         return res.status(422).json({
             code: 422,
-            reason: 'Validation Error',
+            reason: 'ValidationError',
             message: 'Missing field',
             location: nonStringField
         });
@@ -78,7 +79,7 @@ userRouter.post('/', jsonParser, (req,res) => {
     if(nonTrimmedFields){
         return res.status(422).json({
             code: 422,
-            reason: 'Validation Error',
+            reason: 'ValidationError',
             message: 'Cannot start or end with whitespace',
             location: nonTrimmedFields
         })
@@ -105,6 +106,9 @@ userRouter.post('/', jsonParser, (req,res) => {
             'max' in sizedFields[field] && 
                 req.body[field].trim() > sizedFields[field].max
     );
+
+    console.log(`Value for tooSmallField is ${tooSmallField}`)
+    console.log(`Value for tooLargeField is ${tooLargeField}`)
     
     if(tooSmallField || tooLargeField) {
         return res.status(422).json({
@@ -126,7 +130,7 @@ userRouter.post('/', jsonParser, (req,res) => {
 
     return User
         //check to see if the username is already inside the database
-        .findOne({username: username})
+        .findOne({username})
         .then(username => {
             if(username) {
                 return Promise.reject({
@@ -140,10 +144,10 @@ userRouter.post('/', jsonParser, (req,res) => {
         })
         .then(hashPassword => {
             return User.create({
-                username: username,
+                username,
                 password: hashPassword,
-                firstName: firstName,
-                lastName: lastName
+                firstName,
+                lastName
             });
         })
         .then(user => {
@@ -154,7 +158,9 @@ userRouter.post('/', jsonParser, (req,res) => {
                 return res.status(err.code).json(err);
             }
 
-            return res.status(500).json(err);
+            console.log(`error is ${err}`);
+
+            return res.status(500).json({code: 500, message: 'Internal server error'});
         });
 });
 
@@ -192,7 +198,7 @@ userRouter.delete('/:id',(req,res) => {
                 return res.status(204).end();
             })
             .catch(err => {
-                return res.status(500).json({message: 'Internal server error'})
+                return res.status(500).json({message: 'Internal server error'});
             });
         })
 });

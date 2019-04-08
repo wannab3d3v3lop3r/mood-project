@@ -13,9 +13,6 @@ const { localStrategy, jwtStrategy } = require('./auth/strategies');
 
 const app = express();
 
-app.use(morgan('common'));
-app.use(express.static('/public'));
-
 // CORS
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -123,7 +120,7 @@ function closeServer() {
 // When we open this file in order to import app and runServer in a test module, we don't want the server to automatically run,
 // and this conditional block makes that possible.
 if (require.main === module) {
-  runServer().catch(err => console.error(err));
+  runServer(DATABASE_URL).catch(err => console.error(err));
 };
 
 //export for test purposes

@@ -23,7 +23,7 @@ userRouter.get('/:id',(req,res) => {
     return User
         .findById(req.params.id)
         .then(user => {
-            res.status(200).json(user.map(user => user.serialize()));
+            res.status(200).json(user.serialize());
         })
         .catch(err => {
             console.error(err);
@@ -97,14 +97,16 @@ userRouter.post('/', (req,res) => {
 
     const tooSmallField = Object.keys(sizedFields).find(
         field =>  {
-            'min' in sizedFields[field] && 
-                req.body[field].trim().length < sizedFields[field].min
-    });
+            return ('min' in sizedFields[field] && 
+                req.body[field].trim().length < sizedFields[field].min)
+        }
+    );
 
     const tooLargeField = Object.keys(sizedFields).find(
-        field => 
-            'max' in sizedFields[field] && 
-                req.body[field].trim() > sizedFields[field].max
+        field => {
+            return ('max' in sizedFields[field] && 
+                req.body[field].trim().length > sizedFields[field].max)
+        }
     );
 
     console.log(`Value for tooSmallField is ${tooSmallField}`)

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-const {DATABASE_URL, PORT} = require('./config');
+const { DATABASE_URL, PORT } = require('./config');
 const { journalRouter } = require('./journal/router');
 const { userRouter } = require('./users/router');
 const { authRouter } = require('./auth/router');
@@ -120,7 +120,7 @@ function closeServer() {
 // When we open this file in order to import app and runServer in a test module, we don't want the server to automatically run,
 // and this conditional block makes that possible.
 if (require.main === module) {
-  runServer(DATABASE_URL).catch(err => console.error(err));
+  runServer().catch(err => console.error(err));
 };
 
 //export for test purposes

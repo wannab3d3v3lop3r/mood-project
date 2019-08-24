@@ -10,7 +10,7 @@ const journalRouter = express.Router();
 
 // journalRouter.use(jwtAuth);
 
-journalRouter.get('/', (req,res) => {
+journalRouter.get('/all', (req,res) => {
     Journal
       .find()
       .then(journalPosts => {
@@ -24,11 +24,24 @@ journalRouter.get('/', (req,res) => {
     )
 });
 
+//gets all the journal posts of the logged in user
+journalRouter.get('/', jwtAuth, (req,res) => {
+    Journal
+        .find({user: req.user.id})
+        .then(notes => {
+            return res.status(200).json(notes.map(note => note.serialize()))
+        })
+        .catch(err => {
+            return res.status(500).json(err);
+        })
+})
+
+//gets one journal post by id
 journalRouter.get('/:id', jwtAuth, (req,res) => {
     Journal
         .findById(req.params.id)
-        .then(user => {
-            return res.status(200).json(user.serialize())
+        .then(note => {
+            return res.status(200).json(note.serialize())
         })
         .catch(err => {
             return res.status(500).json(err);
@@ -55,8 +68,15 @@ journalRouter.post('/', jwtAuth, (req,res) => {
         mood: req.body.mood,
         title: req.body.title,
         thoughts: req.body.thoughts,
-        date: Date.now()
+        publishDate: new Date()
     }
+
+    // Journal.find({publishDate: newDate().substring(0,10)})
+    //     .then(res => {
+    //         if(res){
+    //             return res.status()
+    //         }
+    //     })
 
     Journal
         .create(journalPost)

@@ -33,8 +33,9 @@ from adding session cookies,  */
 const localAuth = passport.authenticate('local', {session: false});
 // The user provides a username and password to login
 authRouter.post('/login', localAuth, (req, res) => {
-  const authToken = createAuthToken(req.user.serialize());
-  res.json({authToken});
+  let user = req.user.serialize();
+  const authToken = createAuthToken(user);
+  res.json({authToken, user});
 });
 
 //creates a middleware for all the endpoints
@@ -42,8 +43,9 @@ const jwtAuth = passport.authenticate('jwt', {session: false});
 
 // The user exchanges a valid JWT for a new one with a later expiration
 authRouter.post('/refresh', jwtAuth, (req, res) => {
-  const authToken = createAuthToken(req.user);
-  res.json({authToken});
+  let user = req.user
+  const authToken = createAuthToken(user);
+  res.json({authToken, user});
 });
 
 module.exports = {authRouter, localAuth, jwtAuth};

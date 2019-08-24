@@ -3,8 +3,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-mongoose.Promise = global.Promise;
-
 //schema to represent a blog post
 const UserSchema = mongoose.Schema({
     username: {type: String, required: true, unique: true},
@@ -28,6 +26,7 @@ UserSchema.methods.serialize = function() {
 // Never store a password directly out of security concerns.
 // Hash the password before storing it.
 UserSchema.statics.hashPassword = function(password) {
+  console.log('password inside static hashPassword is ' + password);
   return bcrypt.hash(password, 10);
 }
 

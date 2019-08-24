@@ -1,28 +1,25 @@
-const TEMP_ENDPOINT = "http://localhost:8080";
+'use strict';
 
-function checkCredentials(email, password){
-    const settings = {
-        url: TEMP_ENDPOINT + '/login',
-        data: {
+//importing functions that render state
 
-        },
-        ContentType: 'application/javascript',
-        dataType: 'json',
-        type: 'GET',
-        success: callback
-    }
-    $.ajax(settings);
-}
+import { renderLoginPage, renderRegisterPage } from "./dashboard/render-pages.js";
+import { onLoginSubmit, onPageLoad, onSignUpSubmit, logout } from "./auth/auth.js"
+ 
+// event listeners
+$(function(){
+    onPageLoad();
 
-function watchLogin(){
-    $('.js-login').submit(function(event){
-        event.preventDefault();
-
-        const email = $(this).find('.user-email').val();
-        const password = $(this).find('.user-password').val();
-
-        console.log(email, password);
+    $('main.app').on('click','.login', () => {
+        $('main.app').html(renderLoginPage());
     })
-}
 
-$(watchLogin);
+    $('main.app').on('click','.register', () => {
+        $('main.app').html(renderRegisterPage());
+    })
+
+    $('main.app').on('submit', '.js-login', onLoginSubmit);
+
+    $('main.app').on('submit', '.js-register', onSignUpSubmit);
+
+    $('.logout').on('click', logout)
+})

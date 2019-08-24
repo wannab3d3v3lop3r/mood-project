@@ -1,0 +1,101 @@
+* {
+    box-sizing: content-box;
+}
+
+body {
+    margin: 0px;
+}
+
+.header-container {
+    border-bottom: 1px black solid;
+}
+
+.header-container > h1 {
+    text-align: center;
+}
+
+.intro {
+    text-align: center;
+}
+
+.empty {
+    border: 1px black solid;
+    height: 100px;
+    width: 100px;
+    display:inline-block;
+    float: left;
+}
+
+.intro {
+    max-width: 400px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 150px 0 0 -180px;
+}
+
+.js-login, .js-signup {
+    width: 300px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 150px 0 0 -150px;
+}
+
+.hidden {
+    display: none;
+}
+
+.colored-box {
+    border: 1px black solid;
+    height: 100px;
+    width: 100px;
+    background-color: red;
+    display:inline-block;
+}
+
+.days{
+    display:inline-block;
+    height: 50px;
+    width: 100px;
+    border: 1px black solid;
+    text-align: center;
+}
+
+input, .login-submit, .register-submit, .login, .register {
+    font: 16px/1.4 "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
+    padding: 11px 10px 11px 13px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}
+
+.title{
+    display: inline-block;
+}
+
+.logout {
+    text-decoration: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    color: black;
+}
+
+.app {
+    position: relative;
+}
+
+.calendar{
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -76,7 +76,6 @@ describe('/api/user',function(){
                 .post('/api/user/')
                 .send(fakeUser)
                 .then(res => {
-                    console.log
                     expect(res).to.have.status(201);
                     expect(res.body).to.be.an('object');
                     expect(res.body).to.have.keys('username','firstName','lastName','id');
@@ -221,35 +220,34 @@ describe('/api/user',function(){
                 })
         })
 
-        // it('reject users with a password with less than 8 characters', function(){
+        it('reject users with a password with less than 8 characters', function(){
 
-        //     return chai
-        //         .request(app)
-        //         .post('/api/user')
-        //         .send({username, password: 'aaaaaaa', firstName, lastName})
-        //         .then(res => {
-        //             console.log(`reject users with a password with less than 8 characters ${JSON.stringify(res.body)} \n\n`)
-        //             expect(res).to.have.status(422);
-        //             expect(res.body.reason).to.equal('ValidationError');
-        //             expect(res.body.message).to.equal('Must be at least 8 characters long');
-        //             expect(res.body.location).to.equal('password');
-        //         })
-        // })
+            return chai
+                .request(app)
+                .post('/api/user')
+                .send({username, password: 'aaaaaaa', firstName, lastName})
+                .then(res => {
+                    console.log(`reject users with a password with less than 8 characters ${JSON.stringify(res.body)} \n\n`)
+                    expect(res).to.have.status(422);
+                    expect(res.body.reason).to.equal('ValidationError');
+                    expect(res.body.message).to.equal('Must be at least 8 characters long');
+                    expect(res.body.location).to.equal('password');
+                })
+        })
 
-        // it('rejected if password is greater than 72', function(){
+        it('rejected if password is greater than 72', function(){
 
-        //     return chai
-        //         .request(app)
-        //         .post('/api/user')
-        //         .send({username, password: new Array(73).fill('a').join(''), firstName, lastName})
-        //         .then(res => {
-        //             console.log(`rejected if password is greater than 72 ${JSON.stringify(res.body)} \n\n`)
-        //             expect(res).to.have.status(422);
-        //             expect(res.body.reason).to.equal('ValidationError');
-        //             expect(res.body.message).to.equal('Must be at most 72 characters long');
-        //             expect(res.body.location).to.equal('password');
-        //         })
-        // })
+            return chai
+                .request(app)
+                .post('/api/user')
+                .send({username, password: new Array(75).fill('a').join(''), firstName, lastName})
+                .then(res => {
+                    expect(res).to.have.status(422);
+                    expect(res.body.reason).to.equal('ValidationError');
+                    expect(res.body.message).to.equal('Must be at most 72 characters long');
+                    expect(res.body.location).to.equal('password');
+                })
+        })
     })
 })
 

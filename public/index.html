@@ -1,45 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <!-- meta data -->
         <link rel="stylesheet" href="index.css">
-
     </head>
     <body>
-        <p>Hello World</p>
+        <header class="header-container">
+            <h1>mood.</h1>
+            <a href="#" class="logout hidden">Logout</a>
+        </header>
+        <main class="app"></main>
 
-        <!-- <section class="register">
-            <form>
-                <label for="email">Email</label>
-                <input id="email" type="text">
-                <label for="password">Password</label>
-                <input id="password" type="text">
-                <button type="submit">submit</button>
-            </form>
-        </section> -->
-
-        <section>
-            <form action="#" class="js-login" aria-label="login">
-                <label for="email">Email</label>
-                <input id="email" type="text" class="user-email" required>
-                <label for="password">Password</label>
-                <input id="password" type="password" class="user-password" required>
-                <button type="submit">submit</button>
-            </form>
-        </section>
-
-        <!-- <section class="journal-post">
-            <form role="form" aria-label="User's Journal Post" action="#" class="js-post-form">
-                <label for="mood">mood</label>
-                <input id="mood" type="text" name="">
-                <label for="title">title</label>
-                <input id="title" type="text" name="">
-                <label for="thoughts" type="text" name="">thoughts</label>
-                <input id="thoughts">
-                <button type="submit">submit</button>
-            </form>
-        </section> -->
-        
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="index.js"></script>
+        <script
+            src="https://code.jquery.com/jquery-3.4.0.min.js"
+            integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+            crossorigin="anonymous">
+        </script>
+        <script type="module" src="index.js"></script>
+        <script type="module" src="./dashboard/dashboard.js"></script>
     </body>
 </html>

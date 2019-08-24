@@ -93,17 +93,7 @@ function fetchJournals(){
 
 $(function(){
     fetchJournals();
-
-    // showDays();
-    // setTimeout(function(){
-    //     renderCalendar(STATE, currentMonth, currentYear)
-    // },1000)
-    
-
-    // HTTP.getAllJournalPosts({onSuccess: RENDER.renderJournalsToCalendar});
-
     $('main.app').on('click','.next-month',next)
-
     $('main.app').on('click','.previous-month',previous)
 })
 
@@ -121,60 +111,6 @@ function previous() {
     currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
     renderCalendar(STATE.journals, currentMonth, currentYear);
     // HTTP.getAllJournalPosts({onSuccess: RENDER.renderJournalsToCalendar});
-}
-
-
-// create a function 
-
-//create State to hold all the data
-
-// API layer,
-function showCalendar(month, year) {
-
-    //first day of the month which lies on which particular day (Mon-Sunday)
-    let firstDay = (new Date(year, month)).getDay();
-
- // body of the calendar
-    // clearing all previous cells
-
-    // filing data about month and in the page via DOM.
-    // monthAndYear.innerHTML = months[month] + " " + year;
-
-    // creating all cells
-    let date = 1;
-    let rowNum = 1;
-
-    let tableString = ``;
-
-    for (let i = 0; i < 5; i++) {
-        // creates a table row
-        tableString += `<div class="row">`;
-        
-        // add on to tableString to produce a big html
-        $('#calendar-body').append(`<div class="row-${rowNum}"><div>`)
-
-        //creating individual cells, filing them up with data.
-        for (let j = 0; j < 7; j++) {
-            //creates empty boxes
-            if (i === 0 && j < firstDay) {
-                $(`.row-${rowNum}`).append(`<div class="empty"></div>`);
-            }
-            else if (date > daysInMonth(month, year)) {
-                break;
-            }
-
-            //creates boxes with the date number
-            else {
-                $(`.row-${rowNum}`).append(`<div class="colored-box"><div class="${lowerCaseMonths[month]}${date}${year}"><span>${date}</span><div class="title"></div></div></div>`);
-
-                date++;
-            }
-        }
-
-        rowNum++;
-        tableString += '</div>'
-    }
-    //return the whole string with .html()
 }
 
 function showDays(){

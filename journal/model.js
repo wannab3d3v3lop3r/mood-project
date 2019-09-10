@@ -13,6 +13,8 @@ const JournalSchema = mongoose.Schema({
     publishDate: {type: Date , required: true, default: Date.now}
 });
 
+//substring(0,10)
+
 JournalSchema.pre('find', function(next) {
   this.populate('User');
   next();

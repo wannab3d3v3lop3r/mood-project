@@ -1,17 +1,30 @@
-* {
+/* * { 
     box-sizing: content-box;
+}   */
+
+a:hover, button:hover {
+    cursor: pointer;
 }
 
 body {
     margin: 0px;
 }
 
+.footer-container {
+    width: 100%;
+    height: 200px;
+}
+
 .header-container {
     border-bottom: 1px black solid;
+    padding: 20px;
+    background-color:#00c9f0;
 }
 
 .header-container > h1 {
     text-align: center;
+    margin: 0;
+
 }
 
 .intro {
@@ -20,10 +33,13 @@ body {
 
 .empty {
     border: 1px black solid;
-    height: 100px;
-    width: 100px;
+    height: 140px;
+    /* width: 140px;
+    border-radius: 10px;
+    margin: 5px;
     display:inline-block;
     float: left;
+    */
 }
 
 .intro {
@@ -48,37 +64,112 @@ body {
     margin: 150px 0 0 -150px;
 }
 
-.hidden {
-    display: none;
+.journal-box {
+    border: 1px black solid;
+    height: 140px;
+    width: 140px;
+    border-radius: 10px;
+    /* margin: 5px; */
+    display: block;
 }
 
-.colored-box {
-    border: 1px black solid;
-    height: 100px;
-    width: 100px;
-    background-color: red;
-    display:inline-block;
+.happy {
+    background-color: #7FFFD4;
+}
+
+.sad {
+    background-color: #00c9f0;
+}
+
+.anger {
+    background-color: #f31884;;
+}
+
+.normal {
+    background-color: #FFF8DC;
 }
 
 .days{
-    display:inline-block;
+    line-height: 50px;
+    display: block;
     height: 50px;
-    width: 100px;
+    /* margin: 5px; */
+    width: 140px;
     border: 1px black solid;
     text-align: center;
+    border-radius: 5px;
 }
 
-input, .login-submit, .register-submit, .login, .register {
+.js-login input, .js-signup input, .login-submit, .register-submit, .login, .register {
     font: 16px/1.4 "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
     padding: 11px 10px 11px 13px;
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 300px;
+    border: 1px solid #DCDCDC;
+}
+
+.js-journal, .js-journal-update {
+    padding-top: 20px;
+}
+
+.journal-info {
+    overflow: scroll;
+    height: 100px;
+    width: 100%;
+    text-align: center;
+}
+
+.journal-info span{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.calendar a { 
+    text-decoration: none;
+    color: black;
+}
+
+.js-journal input, .js-journal textarea, .js-journal-update input, .js-journal-update textarea{
+    font: 16px/1.4 "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
+    padding: 11px 10px 11px 13px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 450px;
+    border: 1px solid #DCDCDC;
+}
+
+.journal-post select, .journal-update select{
+    width: 450px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #DCDCDC;
+}
+
+.js-journal textarea, .js-journal-update textarea {
+    height: 400px;
+}
+
+.js-journal button[type="submit"], .js-journal-update button[type="submit"], .js-journal button[type="click"], .js-journal-update button[type="click"] {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 200px;
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px solid #DCDCDC;
 }
 
 .title{
     display: inline-block;
+}
+
+.date-number {
+    padding-left: 5px;
 }
 
 .logout {
@@ -95,7 +186,42 @@ input, .login-submit, .register-submit, .login, .register {
 }
 
 .calendar{
-    width: 1000px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.calendar-nav {
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.month {
+    display: inline-block;
+}
+
+/* .row {
+    width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+} */
+
+.calendar-container{
+    max-width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.journal-box, .days, .empty {
+    flex: 1 0 auto;
+    /* flex: 1; */
+    width: 13.2%;
+    max-width: 13.2%;
+    margin: .5%;
+    /* margin: 0 auto; */
 }

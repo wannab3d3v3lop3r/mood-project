@@ -66,6 +66,26 @@ function createJournal(options){
         data: JSON.stringify(journalData),
         success: onSuccess,
         error: err => {
+            if(onError) {
+                onError(err);
+            }
+        }
+    })
+}
+
+function updateJournalPost(options){
+    let { updatedJournalData, onSuccess, onError } = options;
+
+    $.ajax(`/api/journal-post/${updatedJournalData.id}`,{
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
+        },
+        dataType: 'json',
+        data: JSON.stringify(updatedJournalData),
+        success: onSuccess,
+        error: err => {
             console.error(err);
             if(onError) {
                 onError(err);
@@ -74,4 +94,24 @@ function createJournal(options){
     })
 }
 
-export { signUpUser, loginUser, createJournal, getAllJournalPosts };
+function deleteJournalPost(options){
+    let { id, onSuccess, onError } = options;
+
+    $.ajax(`/api/journal-post/${id}`,{
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
+        },
+        dataType: 'json',
+        success: onSuccess,
+        error: err => {
+            console.error(err);
+            if(onError) {
+                onError(err);
+            }
+        }
+    })
+}
+
+export { signUpUser, loginUser, createJournal, getAllJournalPosts, updateJournalPost, deleteJournalPost };

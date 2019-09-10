@@ -1,12 +1,14 @@
-import { signUpUser, loginUser } from "../utilities/http.js";
-import { renderLoginPage,renderDashboardPage, renderStarterPage } from "../dashboard/render-pages.js";
+import { createJournal } from "../utilities/http.js"
+import { signUpUser, loginUser, updateJournalPost, deleteJournalPost } from "../utilities/http.js";
+import { fetchJournals } from "../dashboard/dashboard.js"
+import { renderLoginPage, renderStarterPage } from "../dashboard/render-pages.js";
 import { getAuthenticatedUserFromCache, saveAuthenticatedUserToCache, deleteAuthenticatedUserFromCache } from "../utilities/cache.js"
 
 
 function onPageLoad(){
     const user = getAuthenticatedUserFromCache();
     if(user.jwtToken){
-        $('main.app').html(renderDashboardPage());
+        $('main.app').html(fetchJournals());
         $('.logout').show();
     }
     else {
@@ -57,7 +59,7 @@ function onLoginSubmit(event){
         onSuccess: user => {
             console.log(`user response is ${JSON.stringify(user)}`)
             saveAuthenticatedUserToCache(user);
-            $('main.app').html(renderDashboardPage());
+            $('main.app').html(fetchJournals());
             $('.logout').show();
         },
         onError: err => {
@@ -67,4 +69,59 @@ function onLoginSubmit(event){
     })
 }
 
-export { onSignUpSubmit, onLoginSubmit, onPageLoad, logout};
+function onCreatePost(event){
+    event.preventDefault();
+
+    let journalData = {
+        title: $('main.app').find('.js-journal .title').val(),
+        mood: $('main.app').find('.js-journal .mood').val(),
+        thoughts: $('main.app').find('.js-journal .thoughts').val()
+    }
+
+    createJournal({
+        journalData,
+        onSuccess: user => {
+            alert(`journal post has been added to database`);
+            $('main.app').html(fetchJournals());
+        },
+        onError: err => {
+            console.log(err);
+        }
+    })
+}
+
+function onUpdatePost(event){
+    event.preventDefault();
+
+    let updatedJournalData = {
+        id: $(event.currentTarget).data('id'),
+        title: $('main.app').find('.js-journal-update .title').val(),
+        mood: $('main.app').find('.js-journal-update .mood').val(),
+        thoughts: $('main.app').find('.js-journal-update .thoughts').val()
+    }
+
+    updateJournalPost({
+        updatedJournalData,
+        onSuccess: () => {
+            alert('Post has been updated');
+            $('main.app').html(fetchJournals());
+        },
+        onError: err => {
+            alert(err)
+        }
+    })
+}
+
+function onDeletePost(id){
+    deleteJournalPost({
+        id,
+        onSuccess: () => {
+            $('main.app').html(fetchJournals());
+        },
+        onError: err => {
+            console.log(`error inside onDeletePost`)
+        }
+    })
+}
+
+export { onSignUpSubmit, onLoginSubmit, onPageLoad, logout, onCreatePost, onUpdatePost, onDeletePost};

@@ -1,44 +1,46 @@
 import { getAllJournalPosts } from '../utilities/http.js'
 
 let STATE = {};
-const CACHE = window.CACHE_MODULE;
-const HTTP = window.HTTP_MODULE;
-const RENDER = window.RENDER_MODULE;
 
 let today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
-let selectYear = document.getElementById("year");
-let selectMonth = document.getElementById("month");
-
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-let lowerCaseMonths = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
-let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
-
-let monthAndYear = document.getElementById("monthAndYear");
+let days = ["Sunday", "Monday", "Tuesday", "Wedneday", "Thursday", "Friday", "Saturday"];
 
 function renderCalendar(state, month, year){
     let firstDay = (new Date(year, month)).getDay();
-    let stateIndex = 0;
+    let alreadyPosted = findLatestDate();
 
     let date = 1;
     let tableString = `<div class="calendar">`;
-    tableString += `<button class="btn btn-outline-primary col-sm-6 previous-month">Previous</button><button class="btn btn-outline-primary col-sm-6 next-month">Next</button>`;
+    tableString += `<div class="calendar-nav">
+                        <div></div>
+                        <div class="calendar-nav-month">
+                            <button class="btn btn-outline-primary col-sm-6 previous-month">Previous</button>
+                            <div class="month">${months[month]} ${year}</div>
+                            <button class="btn btn-outline-primary col-sm-6 next-month">Next</button>
+                        </div>
+                        <div>
+                            ${alreadyPosted ? `` : `<a href="#" class="btn-post">Create Post</a>`}
+                        </div>
+                    </div>`;
+
     // calendar dates of the month
-    tableString += `<div>`;
+    tableString += `<div class="calendar-container">`
+
     tableString += showDays();
-    tableString += `</div>`
-    console.log(state)
+
     // calendar dates with number
     for (let i = 0; i < 5; i++) {
         // creates a table row
-        tableString += `<div class="row">`;
+        // tableString += `<div class="row">`;
 
         //creating individual cells, filing them up with data.
         for (let j = 0; j < 7; j++) {
             //creates empty boxes
             if (i === 0 && j < firstDay) {
-                tableString += `<div class="empty"></div>`;
+                tableString += `<div class="journal-box empty hidden"></div>`;
             }
             else if (date > daysInMonth(month, year)) {
                 break;
@@ -46,45 +48,84 @@ function renderCalendar(state, month, year){
             //creates boxes with the date number
             else {
 
-                const box = findStuffForDayLOL(state, date, month + 1, year);
-                console.log(box)
-                tableString +=
-                `<div  class="colored-box">
-                    <div>
-                    <span>${date}</span>
-                    <div class="title"></div>
-                    </div>
-                </div>`;
+                const box = findDateData(state, date, month + 1, year);
+
+                if(box !== undefined){
+                    tableString +=
+                        `<a href="#" class="journal-box ${box.mood}" data-id="${box.id}"> 
+                            <div>
+                                <span class="date-number">${date}</span>
+                            </div>
+                            <div class="journal-info">
+                                <span>${box.title}</span>
+                                <p class="content">${box.thoughts}</p>
+                            </div>
+                        </a>`;
+                }
+                else {
+                    tableString +=
+                    `<div class="journal-box hidden">
+                        <div>
+                            <span class="date-number">${date}</span>
+                        </div>
+                    </div>`;
+                }
+
                 date++;
             }
         }
-        tableString += '</div>'
     }
+    tableString += '</div>'
     //return the whole string with .html()
     $('main.app').html(tableString);
 }
 
-function findStuffForDayLOL(state, date, month, year){
+function findDateData(state, date, month, year){
 
     let items = state.find(item => {
-        let journalDay = Number(item.publishDate.substring(9,10))
-        let journalMonth = Number(item.publishDate.substring(6,7))
-        let journalYear = Number(item.publishDate.substring(0,4))
+        let journalDay = 0;
+        let journalMonth = 0;
+        let journalYear = 0;
 
-        if(date === journalDay && month === journalMonth && year === journalYear){
-            return item
+        if(Number(item.publishDate.substring(8,9) === 0)){
+            journalDay = Number(item.publishDate.substring(9,10))
+            journalMonth = Number(item.publishDate.substring(6,7))
+            journalYear = Number(item.publishDate.substring(0,4))
+
+            return date === journalDay && month === journalMonth && year === journalYear
+        }
+        else {
+            journalDay = Number(item.publishDate.substring(8,10))
+            journalMonth = Number(item.publishDate.substring(6,7))
+            journalYear = Number(item.publishDate.substring(0,4))
+
+            return date === journalDay && month === journalMonth && year === journalYear
         }
     })
-
-    console.log(`items is `, items)
 
     return items;
 }
 
+function findLatestDate(){
+
+    let today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+    let currentDay = today.getDate();
+
+    return STATE.journals.some(journal => {
+
+            let journalDay = Number(journal.publishDate.substring(8,10))
+            let journalMonth = Number(journal.publishDate.substring(5,7))
+            let journalYear = Number(journal.publishDate.substring(0,4))
+
+            return journalDay === currentDay && journalMonth === currentMonth + 1 && journalYear === currentYear
+    })
+}
+
 function storeJournals(data){
     STATE.journals = data;
-    renderCalendar(data, currentMonth, currentYear);
-    console.log(`State has been stored`, STATE);
+    renderCalendar(data, currentMonth, currentYear)
 }
 
 function fetchJournals(){
@@ -101,35 +142,32 @@ $(function(){
 function next() {
     currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
     currentMonth = (currentMonth + 1) % 12;
-    // showCalendar(currentMonth, currentYear);
     renderCalendar(STATE.journals, currentMonth, currentYear);
-    // HTTP.getAllJournalPosts({onSuccess: RENDER.renderJournalsToCalendar});
 }
 
 function previous() {
     currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
     currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
     renderCalendar(STATE.journals, currentMonth, currentYear);
-    // HTTP.getAllJournalPosts({onSuccess: RENDER.renderJournalsToCalendar});
 }
 
 function showDays(){
     let dayString = '';
     for(let i = 0; i < 7; i++){
-        dayString += `<div class="days">${days[i]}</div>`
+        dayString += `<div class="days hidden">${days[i]}</div>`
     }
     return dayString;
 }
+
 // check how many days in a month code from https://dzone.com/articles/determining-number-days-month
 function daysInMonth(iMonth, iYear) {
     return 32 - new Date(iYear, iMonth, 32).getDate();
 }
 
+function getJournalPost(id){
+    let foundJournal = STATE.journals.find(journal => journal.id === id)
+    STATE.currentID = foundJournal.id
+    return foundJournal;
+}
 
-// view
-
-
-
-//controller
-
-//model
+export { fetchJournals, getJournalPost }

@@ -47,5 +47,43 @@ const renderDashboardPage = () => {
                 </div>
             </div>`;
 }
+//<input id="mood" type="text" name="mood" class="mood" placeholder="mood" required>
+const renderCreatePost = () => {
+    return `<section class="journal-post">
+                <form role="form" aria-label="User's Journal Post" class="js-journal">
+                    <input id="title" type="text" name="title" class="title" placeholder="title" required>
+                    <select class="mood">
+                        <option>Choose a mood</option>
+                        <option value="happy">Happy</option>
+                        <option value="sad">Sad</option>
+                        <option value="anger">Anger</option>
+                        <option value="normal">Normal</option>
+                    </select>
+                    <textarea id="thoughts" type="text" name="thoughts" class="thoughts" placeholder="thoughts" required></textarea>
+                    <button class="back-btn" type="click">Back</button>
+                    <button type="submit">submit</button>
+                </form>
+            </section>`
+}
 
-export { renderStarterPage, renderLoginPage, renderRegisterPage, renderDashboardPage }
+const renderUpdatePost = journalPost => {
+    return `<section class="journal-update">
+                <form role="form" aria-label="User's Journal Post" class="js-journal-update" data-id="${journalPost.id}">
+                    <input id="title" type="text" name="title" class="title" placeholder="title" value="${journalPost.title} required"></input>
+                    <select class="mood">
+                        <option value="happy" ${journalPost.mood === 'happy' ? 'selected' : ''}>Happy</option>
+                        <option value="sad" ${journalPost.mood === 'sad' ? 'selected' : ''}>Sad</option>
+                        <option value="anger" ${journalPost.mood === 'anger' ? 'selected' : ''}>Anger</option>
+                        <option value="normal" ${journalPost.mood === 'normal' ? 'selected' : ''}>Normal</option>
+                    </select>
+                    <textarea id="thoughts" type="text" name="thoughts" class="thoughts" placeholder="thoughts" required>${journalPost.thoughts}</textarea>
+                    <button class="delete-btn" type="click">Delete</button>
+                    <button class="back-btn" type="click">Back</button>
+                    <button class="update-btn" type="submit">submit</button>
+                </form>
+            </section>`
+}
+
+
+
+export { renderStarterPage, renderLoginPage, renderRegisterPage, renderDashboardPage, renderCreatePost, renderUpdatePost}

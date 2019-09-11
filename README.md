@@ -17,7 +17,7 @@ After a few clicks, it will direct you to the song on Youtube's page.
 
 Start Page:
 
-![start-page](screenshots/starter-page.jpg)
+![start-page](screenshots/starter-page.png)
 
 Login Screen:
 
@@ -31,13 +31,14 @@ Dashboard Screen:
 
 ![dashboard](screenshots/dashboard.png)
 
+Update Page:
+
+![update](screenshots/update.png)
+
 Edit Page:
 
 ![edit](screenshots/edit.png)
 
-Update Page:
-
-![update](screenshots/update.png)
 ## Built With
 
 ### Front-End

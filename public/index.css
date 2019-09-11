@@ -15,7 +15,14 @@ body {
     margin: 0px;
 }
 
+footer {
+    min-height: 100px;
+    position:relative;
+}
+
 .footer-container {
+    position: absolute;
+    bottom: 0;
     width: 100%;
     height: 100px;
 }
@@ -49,18 +56,26 @@ body {
     */
 }
 
-.intro {
-    max-width: 400px;
+/* .intro {
+    max-width: 700px;
     height: 50px;
     margin-left: auto;
     margin-right: auto;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: 150px 0 0 -180px;
+    margin: 150px 0 0 -325px;
+} */
+
+.intro, .js-login, .js-signup {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 500px;
 }
 
-.js-login, .js-signup {
+/* .js-login, .js-signup {
     width: 300px;
     height: 50px;
     margin-left: auto;
@@ -69,7 +84,7 @@ body {
     top: 50%;
     left: 50%;
     margin: 150px 0 0 -150px;
-}
+} */
 
 .journal-box {
     border: 1px black solid;

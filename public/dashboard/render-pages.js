@@ -3,13 +3,19 @@
 const renderStarterPage = () => {
     return `
         <div class="intro">
-            <h2>
-                Release your inner thoughts
-                <br>
-                Find comfort and love within yourself
-            </h2>
-            <button class="login">Log In</button>
-            <button class="register">Get Started</button>
+            <div>
+                <h2 class="intro-title">
+                    A mood journal with visual appeal
+                    <br>
+                    A calendar that tracks how many times you felt in a month
+                    <br>    
+                    A safe space where you can embrace those feelings
+                </h2>
+            </div>
+            <div class="intro-btn">
+                <button class="login">Log In</button>
+                <button class="register">Get Started</button>
+            </div>
         </div>
         `
 }
@@ -20,7 +26,7 @@ const renderLoginPage = () => {
                 <input id="password" type="password" class="password" placeholder="Password" required>
                 <button class="back-btn-login" type="click">Back</button>
                 <button class="login-submit" type="submit">Log in</button>
-                <div class="error"></div>
+                <p class="error"></p>
             </form>`
 }
 

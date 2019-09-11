@@ -29,7 +29,6 @@ function loginUser(options){
         data: JSON.stringify(userData),
         success: onSuccess,
         error: err => {
-            console.log(err);
             if(onError) {
                 onError(err);
             }
@@ -85,7 +84,6 @@ function updateJournalPost(options){
         data: JSON.stringify(updatedJournalData),
         success: onSuccess,
         error: err => {
-            console.error(err);
             if(onError) {
                 onError(err);
             }
@@ -105,7 +103,6 @@ function deleteJournalPost(options){
         dataType: 'json',
         success: onSuccess,
         error: err => {
-            console.error(err);
             if(onError) {
                 onError(err);
             }

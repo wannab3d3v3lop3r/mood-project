@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 mongoose.Promise = global.Promise;
 
@@ -31,6 +32,8 @@ passport.use(jwtStrategy); //Passport to use our jwtStrategy when receiving JWT
 app.use(morgan("common")); // log the http layer
 app.use(express.json()); // AJAX request JSON data payload can be parsed and saved into request.body
 app.use(express.static('public')); //Intercepts al HTTP requests that match files inside /public
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/user/',userRouter);
 app.use('/api/journal-post/', journalRouter);

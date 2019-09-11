@@ -39,9 +39,6 @@ function onSignUpSubmit(event){
             $('main.app').html(renderLoginPage());
         },
         onError: err => {
-            console.log(err.responseJSON.message)
-            console.log($('main.app'))
-            console.log($('.js-signup').find('.error'))
             $('.js-signup').find('.error').html(err.responseJSON.message)
         }    
     })
@@ -64,7 +61,7 @@ function onLoginSubmit(event){
             $('.logout').show();
         },
         onError: err => {;
-            console.log(err);
+            $('.js-login').find('.error').html(err.responseText)
         }    
     })
 }
@@ -116,6 +113,7 @@ function onDeletePost(id){
     deleteJournalPost({
         id,
         onSuccess: () => {
+            alert('Post Deleted')
             $('main.app').html(fetchJournals());
         },
         onError: err => {

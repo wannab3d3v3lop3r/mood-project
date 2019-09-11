@@ -16,17 +16,12 @@ const createAuthToken = function(user) {
   });
 };
 
-const localAuth = passport.authenticate('local', {session: false}, function(nullerror, boolean, err){
-  console.log(`error message is`, err.message);
-  if(err){
-    return err
-  }
-});
+const localAuth = passport.authenticate('local', {session: false});
 
-authRouter.post('/login', localAuth, (req, res) => {
-  let user = req.user.serialize();
-  const authToken = createAuthToken(user);
-  res.json({authToken, user});
+authRouter.post('/login', localAuth,(req, res) => {
+    let user = req.user.serialize();
+    const authToken = createAuthToken(user);
+    res.json({authToken, user});
 });
 
 const jwtAuth = passport.authenticate('jwt', {session: false});

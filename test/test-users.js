@@ -198,7 +198,7 @@ describe('/api/user',function(){
                     .then(res => {
                         expect(res).to.have.status(422);
                         expect(res.body.reason).to.equal('ValidationError');
-                        expect(res.body.message).to.equal('username already taken');
+                        expect(res.body.message).to.equal('Username already taken');
                         expect(res.body.location).to.equal('username');
                     })
                 })

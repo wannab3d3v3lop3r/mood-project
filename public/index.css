@@ -151,7 +151,7 @@ footer {
 
 .journal-info {
     padding: 0 5px 0 5px;
-    overflow: scroll;
+    overflow-y: scroll;
     height: 100px;
     width: 100%;
     text-align: center;

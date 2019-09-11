@@ -7,9 +7,8 @@ const renderStarterPage = () => {
                 <h2 class="intro-title">
                     A mood journal with visual appeal
                     <br>
-                    A calendar that tracks how many times you felt in a month
+                    A safe space where you can embrace
                     <br>    
-                    A safe space where you can embrace those feelings
                 </h2>
             </div>
             <div class="intro-btn">

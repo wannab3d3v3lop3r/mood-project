@@ -16,7 +16,13 @@ const createAuthToken = function(user) {
   });
 };
 
-const localAuth = passport.authenticate('local', {session: false});
+const localAuth = passport.authenticate('local', {session: false}, function(nullerror, boolean, err){
+  console.log(`error message is`, err.message);
+  if(err){
+    return err
+  }
+});
+
 authRouter.post('/login', localAuth, (req, res) => {
   let user = req.user.serialize();
   const authToken = createAuthToken(user);

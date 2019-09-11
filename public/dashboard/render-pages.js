@@ -60,8 +60,10 @@ const renderCreatePost = () => {
                         <option value="normal">Normal</option>
                     </select>
                     <textarea id="thoughts" type="text" name="thoughts" class="thoughts" placeholder="thoughts" required></textarea>
-                    <button class="back-btn" type="click">Back</button>
-                    <button type="submit">submit</button>
+                    <div class="btn-container">
+                        <button class="back-btn" type="click">Back</button>
+                        <button type="submit">submit</button>
+                    </div>
                 </form>
             </section>`
 }
@@ -77,8 +79,10 @@ const renderUpdatePost = journalPost => {
                         <option value="normal" ${journalPost.mood === 'normal' ? 'selected' : ''}>Normal</option>
                     </select>
                     <textarea id="thoughts" type="text" name="thoughts" class="thoughts" placeholder="thoughts" required>${journalPost.thoughts}</textarea>
-                    <button class="delete-btn" type="click">Delete</button>
-                    <button class="back-btn" type="click">Back</button>
+                    <div class="btn-container">
+                        <button class="back-btn" type="click">Back</button>
+                        <button class="delete-btn" type="click">Delete Post</button>
+                    </div>
                     <button class="update-btn" type="submit">submit</button>
                 </form>
             </section>`

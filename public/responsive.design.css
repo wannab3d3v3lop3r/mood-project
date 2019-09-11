@@ -11,4 +11,39 @@
     max-width: 100%;
     width: 100%;
   }
+
+  .journal-title {
+    font-size: 20px;
+  }
+
+  .journal-content {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 590px){
+  .calendar-nav-month{
+    margin-left:0;
+  }
+
+  .month {
+    margin: 0;
+  }
+  
+  .next-btn, .prev-btn{
+    width: auto;
+  }
+  .prev-btn, .next-btn {
+    vertical-align: unset;
+  }
+  .month {
+    font-size: 17px;
+  }
+}
+
+@media only screen and (max-width: 375px){
+
+  .month {
+    font-size: 10px;
+  }
 }

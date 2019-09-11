@@ -5,7 +5,7 @@ let STATE = {};
 let today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
-let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 let days = ["Sunday", "Monday", "Tuesday", "Wedneday", "Thursday", "Friday", "Saturday"];
 
 function renderCalendar(state, month, year){
@@ -17,9 +17,9 @@ function renderCalendar(state, month, year){
     tableString += `<div class="calendar-nav">
                         <div></div>
                         <div class="calendar-nav-month">
-                            <button class="btn btn-outline-primary col-sm-6 previous-month">Previous</button>
+                            <button class="next-btn previous-month"><i class="arrow left"></i>Previous</button>
                             <div class="month">${months[month]} ${year}</div>
-                            <button class="btn btn-outline-primary col-sm-6 next-month">Next</button>
+                            <button class="prev-btn next-month">Next<i class="arrow right"></i></button>          
                         </div>
                         <div>
                             ${alreadyPosted ? `` : `<a href="#" class="btn-post">Create Post</a>`}
@@ -57,8 +57,8 @@ function renderCalendar(state, month, year){
                                 <span class="date-number">${date}</span>
                             </div>
                             <div class="journal-info">
-                                <span>${box.title}</span>
-                                <p class="content">${box.thoughts}</p>
+                                <span class="journal-title">${box.title}</span>
+                                <p class="journal-content">${box.thoughts}</p>
                             </div>
                         </a>`;
                 }

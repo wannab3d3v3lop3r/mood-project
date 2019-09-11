@@ -81,7 +81,7 @@ function onCreatePost(event){
     createJournal({
         journalData,
         onSuccess: user => {
-            alert(`journal post has been added to database`);
+            alert(`Journal has been saved`);
             $('main.app').html(fetchJournals());
         },
         onError: err => {
@@ -103,7 +103,7 @@ function onUpdatePost(event){
     updateJournalPost({
         updatedJournalData,
         onSuccess: () => {
-            alert('Post has been updated');
+            alert('Journal post has been updated');
             $('main.app').html(fetchJournals());
         },
         onError: err => {

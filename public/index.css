@@ -1,6 +1,6 @@
-/* * { 
-    box-sizing: content-box;
-}   */
+* {
+    font-family: 'Helvetica';
+}
 
 a:hover, button:hover {
     cursor: pointer;
@@ -12,19 +12,21 @@ body {
 
 .footer-container {
     width: 100%;
-    height: 200px;
+    height: 100px;
 }
 
 .header-container {
     border-bottom: 1px black solid;
     padding: 20px;
-    background-color:#00c9f0;
+    background: url('./images/banner.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%; 
 }
 
 .header-container > h1 {
     text-align: center;
     margin: 0;
-
+    color: white;
 }
 
 .intro {
@@ -90,6 +92,8 @@ body {
 }
 
 .days{
+    background: url('./images/days.jpg');
+    color: white;
     line-height: 50px;
     display: block;
     height: 50px;
@@ -115,6 +119,7 @@ body {
 }
 
 .journal-info {
+    padding: 0 5px 0 5px;
     overflow: scroll;
     height: 100px;
     width: 100%;
@@ -154,14 +159,16 @@ body {
     height: 400px;
 }
 
-.js-journal button[type="submit"], .js-journal-update button[type="submit"], .js-journal button[type="click"], .js-journal-update button[type="click"] {
-    margin-left: auto;
-    margin-right: auto;
+.js-journal button[type="submit"], .js-journal-update button[type="submit"], .js-journal button[type="click"],.js-journal-update button[type="click"] {
     display: block;
     width: 200px;
     padding: 10px;
     margin-top: 20px;
     border: 1px solid #DCDCDC;
+}
+.js-journal-update button[type="submit"]{
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .title{
@@ -178,7 +185,10 @@ body {
     top: 0;
     right: 0;
     padding: 10px;
-    color: black;
+    color: white;
+    border: 1px white solid;
+    border-radius: 3px;
+    margin: 5px 5px 0 0;
 }
 
 .app {
@@ -195,20 +205,16 @@ body {
     text-align: center;
     padding: 10px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .month {
     display: inline-block;
+    font-size: 26px;
+    text-transform: uppercase;
+    margin: 0 10px 0 10px;
 }
-
-/* .row {
-    width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
-} */
 
 .calendar-container{
     max-width: 90%;
@@ -224,4 +230,55 @@ body {
     max-width: 13.2%;
     margin: .5%;
     /* margin: 0 auto; */
+}
+
+.btn-post {
+    border: 1px black solid;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+i {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+.next-btn, .prev-btn {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+    padding: 5px;
+    width: 70px;
+    vertical-align: top;
+}
+
+.journal-title {
+    font-size: 10px;
+    display: inline-block;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.journal-content {
+    font-size: 10px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+.calendar-nav-month {
+    margin-left: 70px
 }

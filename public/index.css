@@ -2,6 +2,11 @@
     font-family: 'Helvetica';
 }
 
+.error {
+    text-align: center;
+    color: red;
+}
+
 a:hover, button:hover {
     cursor: pointer;
 }
@@ -104,7 +109,7 @@ body {
     border-radius: 5px;
 }
 
-.js-login input, .js-signup input, .login-submit, .register-submit, .login, .register {
+.js-login input, .js-signup input, .login-submit, .register-submit, .login, .register, .back-btn-login {
     font: 16px/1.4 "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
     padding: 11px 10px 11px 13px;
     display: block;
@@ -281,4 +286,8 @@ i {
 
 .calendar-nav-month {
     margin-left: 70px
+}
+
+.hide {
+    display: none;
 }

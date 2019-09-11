@@ -33,14 +33,10 @@ userRouter.get('/:id',(req,res) => {
 
 userRouter.post('/', (req,res) => {
 
-    //Check to see if the req.body consists of the requiredFields
-
     const requiredFields = ['username','password'];
-
     const missingFields = requiredFields.find(fields => !( fields in req.body ));
 
     console.log(`the request body through userRouter endpoint is ${JSON.stringify(req.body)} \n`);
-    // console.log(`req.body went submitting to endpoint length ${JSON.stringify(req.body.username.length)} \n\n`);
 
     if(missingFields) {
         return res.status(422).json({
@@ -51,12 +47,9 @@ userRouter.post('/', (req,res) => {
         });
     }
 
-    //Make sure the values of each req.body are strings
-
     const stringField = ['username','password','firstName','lastName'];
 
     const nonStringField = stringField.find(
-        //can do typeof field instead of 'string'
         field => field in req.body && typeof req.body[field] !== 'string'
     );
 
@@ -68,8 +61,6 @@ userRouter.post('/', (req,res) => {
             location: nonStringField
         });
     }
-
-    //Check to see if the user copied and pasted their info with spaces at the beginning or end
 
     const explicityTrimmedFields = ['username','password'];
     const nonTrimmedFields = explicityTrimmedFields.find(
@@ -109,9 +100,6 @@ userRouter.post('/', (req,res) => {
         }
     );
 
-    console.log(`Value for tooSmallField is ${tooSmallField}`)
-    console.log(`Value for tooLargeField is ${tooLargeField}`)
-    
     if(tooSmallField || tooLargeField) {
         return res.status(422).json({
             code: 422,
@@ -138,7 +126,7 @@ userRouter.post('/', (req,res) => {
                 return Promise.reject({
                     code: 422,
                     reason: `ValidationError`,
-                    message: `username already taken`,
+                    message: `Username already taken`,
                     location: 'username'
                 });
             }
@@ -160,8 +148,6 @@ userRouter.post('/', (req,res) => {
                 return res.status(err.code).json(err);
             }
 
-            console.log(`error is ${err}`);
-
             return res.status(500).json({code: 500, message: 'Internal server error'});
         });
 });
@@ -170,7 +156,6 @@ userRouter.put('/:id', (req,res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
         const message = (`Request path id (${req.params.id}) and request body id ` + `(${req.body.id}) must match`);
         console.error(message);
-        // we return here to break out of this function
         return res.status(400).json({message: message});
     }
 

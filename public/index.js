@@ -2,7 +2,7 @@
 
 //importing functions that render state
 import { getJournalPost, fetchJournals } from "./dashboard/dashboard.js"
-import { renderLoginPage, renderRegisterPage, renderCreatePost, renderUpdatePost } from "./dashboard/render-pages.js";
+import { renderLoginPage, renderRegisterPage, renderCreatePost, renderUpdatePost, renderStarterPage } from "./dashboard/render-pages.js";
 import { onLoginSubmit, onPageLoad, onSignUpSubmit, logout, onCreatePost, onUpdatePost, onDeletePost } from "./auth/auth.js"
  
 // event listeners
@@ -25,7 +25,7 @@ $(function(){
 
     $app.on('submit', '.js-login', onLoginSubmit);
 
-    $app.on('submit', '.js-register', onSignUpSubmit);
+    $app.on('submit', '.js-signup', onSignUpSubmit);
 
     $app.on('submit','.js-journal', onCreatePost);
 
@@ -49,6 +49,11 @@ $(function(){
         e.preventDefault();
 
         $app.html(fetchJournals());
+    })
+
+    $app.on('click','.back-btn-login', function(event){
+        event.preventDefault();
+        $app.html(renderStarterPage());
     })
 
     $app.on('submit','.js-journal-update', onUpdatePost)

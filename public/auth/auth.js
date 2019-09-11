@@ -35,12 +35,14 @@ function onSignUpSubmit(event){
 
     signUpUser({
         userData,
-        onSuccess: user => {
+        onSuccess: () => {
             $('main.app').html(renderLoginPage());
         },
         onError: err => {
-            alert(`${JSON.stringify(err)}`);
-            console.log(err.responseJSON.message);
+            console.log(err.responseJSON.message)
+            console.log($('main.app'))
+            console.log($('.js-signup').find('.error'))
+            $('.js-signup').find('.error').html(err.responseJSON.message)
         }    
     })
     
@@ -57,14 +59,12 @@ function onLoginSubmit(event){
     loginUser({
         userData,
         onSuccess: user => {
-            console.log(`user response is ${JSON.stringify(user)}`)
             saveAuthenticatedUserToCache(user);
             $('main.app').html(fetchJournals());
             $('.logout').show();
         },
-        onError: err => {
-            alert(`${JSON.stringify(err)}`);
-            console.log(err.responseJSON.message);
+        onError: err => {;
+            console.log(err);
         }    
     })
 }

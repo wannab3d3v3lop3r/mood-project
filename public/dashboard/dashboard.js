@@ -133,7 +133,6 @@ function fetchJournals(){
 }
 
 $(function(){
-    fetchJournals();
     $('main.app').on('click','.next-month',next)
     $('main.app').on('click','.previous-month',previous)
 })

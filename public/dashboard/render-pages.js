@@ -18,8 +18,9 @@ const renderLoginPage = () => {
     return `<form class="js-login" aria-label="login">
                 <input id="username" type="text" class="username" placeholder="Username" required>
                 <input id="password" type="password" class="password" placeholder="Password" required>
+                <button class="back-btn-login" type="click">Back</button>
                 <button class="login-submit" type="submit">Log in</button>
-                <div class="error hidden"></div>
+                <div class="error"></div>
             </form>`
 }
 
@@ -29,8 +30,9 @@ const renderRegisterPage = () => {
                 <input id="password" class="password" type="text" placeholder="Password" required>
                 <input id="firstname" class="firstname" type="text" placeholder="First name" required>
                 <input id="lastname" class="lastname" type="text" placeholder="Last name" required>
+                <button class="back-btn-login" type="click">Back</button>
                 <button class="register-submit" type="submit">Sign up</button>
-                <div class="error hidden"></div>
+                <p class="error"></p>
             </form>`
 }
 
@@ -90,4 +92,4 @@ const renderUpdatePost = journalPost => {
 
 
 
-export { renderStarterPage, renderLoginPage, renderRegisterPage, renderDashboardPage, renderCreatePost, renderUpdatePost}
+export { renderStarterPage, renderLoginPage, renderRegisterPage, renderDashboardPage, renderCreatePost, renderUpdatePost }

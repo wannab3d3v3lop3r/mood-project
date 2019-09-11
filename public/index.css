@@ -135,7 +135,18 @@ footer {
 }
 
 .js-journal, .js-journal-update {
-    padding-top: 20px;
+    padding-top: 50px;
+}
+
+.js-journal-update, .js-journal {
+    width: 60%;
+}
+
+.journal-update, .journal-post {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .journal-info {
@@ -163,12 +174,16 @@ footer {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 450px;
+    width: 100%;
     border: 1px solid #DCDCDC;
 }
 
+.journal-post{
+    width: 100%;
+}
+
 .journal-post select, .journal-update select{
-    width: 450px;
+    width: 100%;
     display: block;
     margin-left: auto;
     margin-right: auto;

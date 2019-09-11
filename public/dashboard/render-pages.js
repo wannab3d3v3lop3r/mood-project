@@ -71,6 +71,7 @@ const renderCreatePost = () => {
                         <button class="back-btn" type="click">Back</button>
                         <button type="submit">submit</button>
                     </div>
+                    <p class="error"></p>
                 </form>
             </section>`
 }

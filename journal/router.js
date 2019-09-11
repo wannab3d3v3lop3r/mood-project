@@ -60,8 +60,9 @@ journalRouter.post('/', jwtAuth, (req,res) => {
         }
     }
 
-    console.log(`req user is ${req.user}`);
-    console.log(`req user is ${JSON.stringify(req.user)}`);
+    if(req.body.mood === "Choose a mood"){
+        return res.status(400).send('Please choose a mood value')
+    }
 
     const journalPost = {
         user: req.user.id,
@@ -71,12 +72,7 @@ journalRouter.post('/', jwtAuth, (req,res) => {
         publishDate: new Date()
     }
 
-    // Journal.find({publishDate: newDate().substring(0,10)})
-    //     .then(res => {
-    //         if(res){
-    //             return res.status()
-    //         }
-    //     })
+    console.log(`mood value is `,req.body.mood)
 
     Journal
         .create(journalPost)

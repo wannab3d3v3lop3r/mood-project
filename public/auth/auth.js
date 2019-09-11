@@ -82,7 +82,7 @@ function onCreatePost(event){
             $('main.app').html(fetchJournals());
         },
         onError: err => {
-            console.log(err);
+            $('main.app').find('.error').text(err.responseText);
         }
     })
 }

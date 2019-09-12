@@ -25,6 +25,11 @@ const renderLoginPage = () => {
                 <input id="password" type="password" class="password" placeholder="Password" required>
                 <button class="back-btn-login" type="click">Back</button>
                 <button class="login-submit" type="submit">Log in</button>
+                <div>
+                    <p>For demo</p>
+                    <p>Use localuser for username</p>
+                    <p>Use localpassword for password</p>
+                </div>
                 <p class="error"></p>
             </form>`
 }
